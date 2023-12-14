@@ -1,0 +1,9 @@
+**/*.DS_Store
+
+# backend
+
+backend/mongoDB/loadMovieDetailsDataset.js
+backend/notizen.md
+node_modules/
+*.env
+*.vscode

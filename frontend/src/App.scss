@@ -1,0 +1,38 @@
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  div.logo-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+section.searchbar {
+  input,
+  button {
+    font-size: 20px;
+  }
+}
+
+div.bg-img {
+  height: 600px;
+  background-image: url('img/moviemagic.png');
+  background-size: cover;
+  background-position: center;
+}
+
+footer {
+  div.wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    div.slogan {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
