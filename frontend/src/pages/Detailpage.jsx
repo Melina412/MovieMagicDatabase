@@ -21,13 +21,16 @@ function Detailpage({ movies }) {
     <>
       <main>
         <section className='detailpage'>
-          <Link to={'/'}>back home</Link>
           <h1>{movie.movieTitle}</h1>
           <div>
             <p>{movie.movieReleaseYear}</p>
           </div>
           <div>
-            <button>Add to Favorites</button>
+            {movie.favorite ? (
+              <button>Remove from Favorites</button>
+            ) : (
+              <button>Add to Favorites</button>
+            )}
             <button>Edit movie</button>
           </div>
           <article>

@@ -10,7 +10,7 @@ function Home({ movies, setMovies }) {
         </h1>
       </div>
       <h2>All Movies</h2>
-      <MovieList movies={movies} setMovies={setMovies} />
+      <MovieList movies={movies} setMovies={setMovies} page='home' />
     </>
   );
 }

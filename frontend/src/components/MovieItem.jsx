@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 
-function MovieItem({ movie }) {
+function MovieItem({ movie, page }) {
   return (
     <article className='movie-item'>
       <Link to={`/movie/${movie._id}`}>
@@ -11,6 +11,9 @@ function MovieItem({ movie }) {
           <p className='title'>{movie.movieTitle}</p>
         </div>
       </Link>
+      <button style={{ display: page === 'favorites' ? 'block' : 'none' }}>
+        Remove from Favorites
+      </button>
     </article>
   );
 }
