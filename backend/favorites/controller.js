@@ -6,7 +6,7 @@ export async function getFavorites(req, res) {
     const db_response = await dbo
       .collection('favoriteMovies')
       .find()
-      .project({ title: 1, favorite: 1 })
+      .project({ movieTitle: 1, favorite: 1 })
       .toArray();
     console.log(db_response);
     res.json(db_response);
@@ -18,11 +18,10 @@ export async function getFavorites(req, res) {
 }
 
 export async function setFavorite(req, res) {
-  const query = { title: 'Punch-Drunk Love' };
+  const query = { movieTitle: 'The Dark Knight Rises' };
 
   try {
-    const db_response = await dbo.collection('movieDetails').findOne(query);
-    console.log(db_response);
+    const db_response = await dbo.collection('movies').findOne(query);
     // findOne returnt entweder das gefundene doc oder null, deswegen kann man nicht prüfen ob acknowledged true ist!
 
     if (db_response) {
@@ -37,6 +36,7 @@ export async function setFavorite(req, res) {
       // updateOne returnt ein UpdateResult-object das diverse properties besitzt, u.a. modifiedCount & auch acknowledged.
 
       if (InsertOneResult.acknowledged && UpdateResult.modifiedCount > 0) {
+        console.log(query, 'added to favorites');
         res.status(201).end();
       } else {
         console.log('db res not ok');
@@ -52,7 +52,7 @@ export async function setFavorite(req, res) {
 }
 
 export async function deleteFavorite(req, res) {
-  const query = { title: 'Star Trek' };
+  const query = { movieTitle: 'The Dark Knight Rises' };
 
   try {
     const DeleteResult = await dbo

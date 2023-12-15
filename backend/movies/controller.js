@@ -3,19 +3,16 @@ import { dbo } from '../utils/database.js';
 export async function getMovies(req, res) {
   try {
     const db_response = await dbo
-      .collection('movieDetails')
-      .find({ director: 'Steven Spielberg' })
+      .collection('movies')
+      .find()
       .project({
-        title: 1,
-        year: 1,
-        rated: 1,
-        runtime: 1,
-        countries: 1,
-        director: 1,
-        genres: 1,
-        actors: 1,
-        plot: 1,
-        'imdb.rating': 1,
+        movieTitle: 1,
+        movieReleaseYear: 1,
+        movieImage: 1,
+        moviePlot: 1,
+        movieRating: 1,
+        movieRuntime: 1,
+        movieGenre: 1,
       })
       .toArray();
     console.log(db_response);

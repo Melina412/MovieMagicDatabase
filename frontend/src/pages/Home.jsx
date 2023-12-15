@@ -1,6 +1,6 @@
 import MovieList from '../components/MovieList';
 
-function Home() {
+function Home({ movies, setMovies }) {
   return (
     <>
       <div className='bg-img'>
@@ -9,7 +9,8 @@ function Home() {
           it.
         </h1>
       </div>
-      <MovieList />
+      <h2>All Movies</h2>
+      <MovieList movies={movies} setMovies={setMovies} />
     </>
   );
 }

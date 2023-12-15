@@ -1,10 +1,11 @@
 import MovieItem from './MovieItem';
 
-function MovieList() {
+function MovieList({ movies, setMovies }) {
   return (
-    <section>
-      <h1>List</h1>
-      <MovieItem />
+    <section className='movie-list'>
+      {movies?.map((movie, key) => (
+        <MovieItem movie={movie} setMovies={setMovies} key={movie._id} />
+      ))}
     </section>
   );
 }
