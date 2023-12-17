@@ -1,6 +1,9 @@
 import MovieList from '../components/MovieList';
+import { MoviesContext } from '../context/Context';
+import { useContext, useEffect, useState } from 'react';
 
-function Home({ movies, setMovies }) {
+function Home({ setMovies }) {
+  const { movies } = useContext(MoviesContext);
   return (
     <>
       <div className='bg-img'>

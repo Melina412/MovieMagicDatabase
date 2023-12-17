@@ -5,7 +5,7 @@
 
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  background-color: #264653;
 }
 
 * {
@@ -27,7 +27,14 @@ header {
   div.logo-wrapper {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 2rem;
+
+    a {
+      text-decoration: none;
+    }
+    p {
+      font-size: 5rem;
+    }
   }
 }
 
@@ -55,11 +62,21 @@ section.movie-list {
     display: flex;
     flex-direction: column;
     padding: 5%;
-    div.img-container {
-      width: 100%;
 
-      img {
+    a {
+      text-decoration: none;
+
+      div.img-container {
         width: 100%;
+
+        img {
+          width: 100%;
+        }
+      }
+      div.text {
+        p.title {
+          font-size: 3rem;
+        }
       }
     }
   }

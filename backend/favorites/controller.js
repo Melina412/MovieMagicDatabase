@@ -4,7 +4,7 @@ import { dbo } from '../utils/database.js';
 export async function getFavorites(req, res) {
   try {
     const db_response = await dbo.collection('favoriteMovies').find().toArray();
-    console.log(db_response);
+    console.log('favorites refreshed');
     res.json(db_response);
   } catch (error) {
     console.log('entry not found', error);
@@ -13,8 +13,9 @@ export async function getFavorites(req, res) {
   res.end();
 }
 
-export async function setFavorite(req, res) {
-  const query = { movieTitle: 'Ben Hur' };
+export async function addFavorite(req, res) {
+  console.log('req body:', req.body);
+  const query = { _id: new ObjectId(req.body.ID) };
 
   try {
     const db_response = await dbo.collection('movies').findOne(query);
@@ -40,17 +41,15 @@ export async function setFavorite(req, res) {
         console.log('Insertion failed');
         res.status(500).json({ error: 'Insertion failed' });
       } else if (UpdateResult1.modifiedCount <= 0) {
-        console.log('Update in the first collection failed');
-        res
-          .status(500)
-          .json({ error: 'Update in the first collection failed' });
+        console.log('Update in movies collection failed');
+        res.status(500).json({ error: 'Update in movies collection failed' });
       } else if (UpdateResult2.modifiedCount <= 0) {
-        console.log('Update in the second collection failed');
+        console.log('Update in favoriteMovies collection failed');
         res
           .status(500)
-          .json({ error: 'Update in the second collection failed' });
+          .json({ error: 'Update in favoriteMovies collection failed' });
       } else {
-        console.log(query, 'added to favorites');
+        console.log(req.body.title, 'added to favoriteMovies');
         res.status(201).end();
       }
     } else {
@@ -65,7 +64,8 @@ export async function setFavorite(req, res) {
 }
 
 export async function deleteFavorite(req, res) {
-  const query = { movieTitle: 'Hachi' };
+  console.log('req body:', req.body);
+  const query = { _id: new ObjectId(req.body.ID) };
 
   const UpdateResult = await dbo
     .collection('movies')
@@ -77,7 +77,7 @@ export async function deleteFavorite(req, res) {
       .deleteOne(query);
 
     if (DeleteResult.acknowledged && UpdateResult.modifiedCount > 0) {
-      console.log(query, 'deleted from favorites');
+      console.log(req.body.title, 'deleted from favorites');
       res.status(204).end();
     }
   } catch (error) {

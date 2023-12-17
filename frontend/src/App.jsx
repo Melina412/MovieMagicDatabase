@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { MoviesContext } from './context/Context';
 import './App.scss';
 
 import Home from './pages/Home';
@@ -10,6 +11,7 @@ import Footer from './components/Footer';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -17,28 +19,63 @@ function App() {
 
   async function fetchData() {
     const res = await fetch(`${import.meta.env.VITE_BACKENDURL}/api/movies`);
-    // const res = await fetch(`http://localhost:9999/api/movies`);
     if (res.ok) {
       const data = await res.json();
       setMovies(data);
     }
   }
 
+  useEffect(() => {
+    fetchFavorites();
+  }, []);
+
+  async function fetchFavorites() {
+    const res = await fetch(`${import.meta.env.VITE_BACKENDURL}/api/favorites`);
+    if (res.ok) {
+      const data = await res.json();
+      setFavorites(data);
+    }
+  }
+
+  console.log({ favorites });
   console.log({ movies });
+
   return (
     <>
-      <BrowserRouter>
-        <Header />
-        <Routes>
-          <Route
-            path='/'
-            element={<Home movies={movies} setMovies={setMovies} />}
-          />
-          <Route path='/movie/:id' element={<Detailpage movies={movies} />} />
-          <Route path='/favorites' element={<Favorites />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <MoviesContext.Provider value={{ movies }}>
+        <BrowserRouter>
+          <Header />
+          <Routes>
+            <Route path='/' element={<Home setMovies={setMovies} />} />
+            <Route
+              path='/movie/:id'
+              element={
+                <Detailpage
+                  favorites={favorites}
+                  setFavorites={setFavorites}
+                  fetchFavorites={fetchFavorites}
+                  fetchData={fetchData}
+                  // addFavorite={addFavorite}
+                  // deleteFavorite={deleteFavorite}
+                />
+              }
+            />
+            <Route
+              path='/favorites'
+              element={
+                <Favorites
+                  favorites={favorites}
+                  setFavorites={setFavorites}
+                  fetchFavorites={fetchFavorites}
+                  // addFavorite={addFavorite}
+                  // deleteFavorite={deleteFavorite}
+                />
+              }
+            />
+          </Routes>
+          <Footer />
+        </BrowserRouter>
+      </MoviesContext.Provider>
     </>
   );
 }

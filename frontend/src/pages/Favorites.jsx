@@ -1,26 +1,26 @@
 import { useState, useEffect } from 'react';
 import MovieList from '../components/MovieList';
 
-function Favorites() {
-  const [favorites, setFavorites] = useState([]);
-
-  useEffect(() => {
-    fetchFavorites();
-  }, []);
-
-  async function fetchFavorites() {
-    const res = await fetch(`${import.meta.env.VITE_BACKENDURL}/api/favorites`);
-    if (res.ok) {
-      const data = await res.json();
-      setFavorites(data);
-    }
-  }
-
-  console.log({ favorites });
+function Favorites({
+  favorites,
+  setFavorites,
+  addFavorite,
+  deleteFavorite,
+  fetchData,
+  fetchFavorites,
+}) {
+  console.log('favorites from fav page:', favorites);
   return (
     <>
       <h2>My Favorites</h2>
-      <MovieList movies={favorites} page='favorites' />
+      <MovieList
+        movies={favorites}
+        favorites={favorites}
+        setFavorites={setFavorites}
+        page='favorites'
+        fetchFavorites={fetchFavorites}
+        fetchData={fetchData}
+      />
     </>
   );
 }
