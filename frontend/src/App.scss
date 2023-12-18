@@ -1,10 +1,4 @@
 :root {
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
   background-color: #264653;
 }
 
@@ -18,85 +12,249 @@ html {
   font-size: 62.5%;
 }
 
+// * font ***********************************************************
+
+@font-face {
+  font-family: PoppinsMedium;
+  src: url('/font/Poppins/Poppins-Medium.ttf');
+}
+@font-face {
+  font-family: PoppinsLight;
+  src: url('/font/Poppins/Poppins-Light.ttf');
+}
+@font-face {
+  font-family: PoppinsBold;
+  src: url('/font/Poppins/Poppins-Bold.ttf');
+}
+@font-face {
+  font-family: PoppinsExtraBold;
+  src: url('/font/Poppins/Poppins-ExtraBold.ttf');
+}
+
+$Poppins300: PoppinsLight, system-ui, Helvetica, Arial, sans-serif;
+$Poppins500: PoppinsMedium, system-ui, Helvetica, Arial, sans-serif;
+$Poppins700: PoppinsBold, system-ui, Helvetica, Arial, sans-serif;
+$Poppins800: PoppinsExtraBold, system-ui, Helvetica, Arial, sans-serif;
+
+// * text & color ***************************************************
+
+$lightgreen: #2a9d8f;
+$darkgreen: #264653;
+$yellow: #e9c46a;
+$white: #ffffff;
+$red: #a16171;
+
+// * mixins ***************************************************
+
+@mixin text-style($ff, $fz, $c) {
+  font-family: $ff;
+  font-size: $fz;
+  color: $c;
+}
+
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+// * genereal element style ************************************
+
+// h1 {
+//   @include text-style($Roboto700, 6.4rem, $gray3, normal);
+//   @include size(35%, 80.3rem);
+// }
+
+button {
+  cursor: pointer;
+}
+
+// - header ***************************************************
+
 header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   font-size: 2rem;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background-color: $darkgreen;
+  height: 18rem;
+  padding: 0 17rem 0 17rem;
 
   div.logo-wrapper {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 6.5rem;
 
     a {
       text-decoration: none;
     }
+
     p {
-      font-size: 5rem;
+      @include text-style($Poppins700, 5rem, $lightgreen);
     }
+  }
+
+  div.add {
+    @include text-style($Poppins500, 2.5rem, $lightgreen);
   }
 }
 
 section.searchbar {
   input,
   button {
-    font-size: 20px;
+    border-radius: 50px;
+  }
+
+  input {
+    @include size(50rem, 6rem);
+    @include text-style($Poppins300, 3rem, $lightgreen);
+    background-color: $darkgreen;
+    border: 3px solid $lightgreen;
+    margin-right: 3.6rem;
+    padding-left: 2rem;
+
+    &::placeholder {
+      @include text-style($Poppins300, 3rem, rgba(42, 157, 143, 0.5));
+    }
+  }
+
+  button {
+    @include size(20rem, 6rem);
+    @include text-style($Poppins500, 3rem, $white);
+    background-color: $lightgreen;
+    border: none;
   }
 }
 
+// - home - movie list ***************************************************
+
 div.bg-img {
-  height: 600px;
+  width: 100vw;
+  height: 100vh;
   background-image: url('img/moviemagic.png');
   background-size: cover;
   background-position: center;
+
+  h1 {
+    @include text-style($Poppins800, 6.5rem, $red);
+    width: 56%;
+    margin: 0 auto;
+    padding-top: 32rem;
+
+    span {
+      color: $darkgreen;
+      text-shadow: -2px -2px 0 $red, 2px -2px 0 $red, -2px 2px 0 $red,
+        2px 2px 0 $red;
+    }
+  }
+}
+
+h2.home-h2 {
+  @include text-style($Poppins800, 6.5rem, $lightgreen);
+  margin: 20rem 0 0 17rem;
 }
 
 section.movie-list {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  width: 90vw;
-  margin: 0 auto;
+  width: 100%;
+  margin: 8rem auto 15rem auto;
+  padding: 0 17rem 30rem 17rem;
+  gap: 15rem;
 
   article.movie-item {
+    @include size(100%, 47vh);
     display: flex;
     flex-direction: column;
-    padding: 5%;
+    gap: 2rem;
 
     a {
       text-decoration: none;
 
-      div.img-container {
-        width: 100%;
+      div.home-flex {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
 
-        img {
+        div.img-container {
           width: 100%;
+          height: 65rem;
+          overflow: hidden;
+
+          img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
         }
-      }
-      div.text {
-        p.title {
-          font-size: 3rem;
+        div.text {
+          p.title {
+            @include text-style($Poppins500, 2rem, $white);
+          }
+          p.rating {
+            @include text-style($Poppins300, 2rem, $lightgreen);
+          }
         }
       }
     }
   }
 }
 
+// - favorites ***************************************************
+
+// - detailpage ***************************************************
+
 section.detailpage {
   width: 90vw;
   margin: 5rem auto;
+  padding: 17rem 12rem 30rem 12rem;
 
-  h1 {
-    font-size: 6rem;
+  h1,
+  h2 {
+    @include text-style($Poppins700, 6rem, $red);
   }
   p {
-    font-size: 3rem;
+    @include text-style($Poppins300, 3rem, $white);
+    margin-bottom: 6rem;
+  }
+
+  div.button-wrapper {
+    display: flex;
+    div.add-delete {
+      @include size(32rem, 4rem);
+      display: flex;
+      background-color: $darkgreen;
+      border: 1px solid $yellow;
+      border-radius: 50px;
+      margin-right: 3.6rem;
+    }
+    button.fav {
+      @include text-style($Poppins700, 2rem, $yellow);
+      background-color: $darkgreen;
+      border: none;
+      padding-left: 2rem;
+    }
+
+    button.add-fav {
+      padding-left: 5rem;
+    }
+
+    button.edit {
+      @include size(15rem, 4rem);
+      @include text-style($Poppins700, 2rem, $lightgreen);
+      background-color: $darkgreen;
+      border: 1px solid $lightgreen;
+      border-radius: 50px;
+      margin-right: 3.6rem;
+    }
   }
   article {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    width: 90vw;
-    padding: 5%;
+    width: 100%;
+    margin-top: 2rem;
 
     div.image {
       width: 100%;
@@ -133,15 +291,31 @@ section.detailpage {
   }
 }
 
+// - footer ***************************************************
+
 footer {
+  @include size(100%, 14rem);
+  @include text-style($Poppins500, 3rem, $darkgreen);
+  background-color: $lightgreen;
+  position: fixed;
+  bottom: 0;
+
   div.wrapper {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    padding: 0 17rem 0 17rem;
 
     div.slogan {
       display: flex;
       align-items: center;
+      gap: 1.5rem;
+    }
+
+    div.logos {
+      display: flex;
+      gap: 3rem;
     }
   }
 }

@@ -12,7 +12,7 @@ function Home({ setMovies, searchTitle, setSearchTitle }) {
           it.
         </h1>
       </div>
-      <h2>All Movies</h2>
+      <h2 className='home-h2'>All Movies</h2>
       <MovieList
         movies={movieOutput}
         setMovies={setMovies}

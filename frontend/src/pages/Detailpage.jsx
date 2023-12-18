@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { MoviesContext } from '../context/Context';
 import { useContext, useEffect, useState } from 'react';
+import ScrollToTop from '../components/ScrollToTop';
 
 function Detailpage({
   favorites,
@@ -100,18 +101,29 @@ function Detailpage({
   return (
     <>
       <main>
+        <ScrollToTop />
         <section className='detailpage'>
           <h1>{movie?.movieTitle}</h1>
           <div>
             <p>{movie?.movieReleaseYear}</p>
           </div>
-          <div>
+          <div className='button-wrapper'>
             {isFavorite ? (
-              <button onClick={deleteFavorite}>Remove from Favorites</button>
+              <div className='add-delete'>
+                <img src='/img/remove-fav.svg' alt='delete logo' />
+                <button className='fav remove-fav' onClick={deleteFavorite}>
+                  Remove from Favorites
+                </button>
+              </div>
             ) : (
-              <button onClick={addFavorite}>Add to Favorites</button>
+              <div className='add-delete'>
+                <img src='/img/add-fav.svg' alt='add logo' />
+                <button className='fav add-fav' onClick={addFavorite}>
+                  Add to Favorites
+                </button>
+              </div>
             )}
-            <button>Edit movie</button>
+            <button className='edit'>Edit movie</button>
           </div>
           <article>
             <div className='image'>

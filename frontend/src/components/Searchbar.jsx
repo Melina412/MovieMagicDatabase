@@ -28,7 +28,7 @@ function Searchbar() {
         placeholder='search movie title'
         onChange={(e) => setSearchTitle(e.target.value)}
       />
-      {/* <button>Submit</button> */}
+      <button>Submit</button>
     </section>
   );
 }

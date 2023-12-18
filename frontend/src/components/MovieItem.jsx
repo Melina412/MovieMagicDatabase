@@ -41,11 +41,14 @@ function MovieItem({ movie, favorites, page, deleteFavorite, fetchFavorites }) {
   return (
     <article className='movie-item'>
       <Link to={`/movie/${movie._id}`} title='show movie details'>
-        <div className='img-container'>
-          <img src={movie.movieImage} alt='movie poster' />
-        </div>
-        <div className='text'>
-          <p className='title'>{movie.movieTitle}</p>
+        <div className='home-flex'>
+          <div className='img-container'>
+            <img src={movie.movieImage} alt='movie poster' />
+          </div>
+          <div className='text'>
+            <p className='title'>{movie.movieTitle}</p>
+            <p className='rating'>Rating: {movie.movieRating}</p>
+          </div>
         </div>
       </Link>
       <button
