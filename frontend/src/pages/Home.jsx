@@ -2,8 +2,8 @@ import MovieList from '../components/MovieList';
 import { MoviesContext } from '../context/Context';
 import { useContext, useEffect, useState } from 'react';
 
-function Home({ setMovies }) {
-  const { movies } = useContext(MoviesContext);
+function Home({ setMovies, searchTitle, setSearchTitle }) {
+  const { movies, movieOutput, setMovieOutput } = useContext(MoviesContext);
   return (
     <>
       <div className='bg-img'>
@@ -13,7 +13,13 @@ function Home({ setMovies }) {
         </h1>
       </div>
       <h2>All Movies</h2>
-      <MovieList movies={movies} setMovies={setMovies} page='home' />
+      <MovieList
+        movies={movieOutput}
+        setMovies={setMovies}
+        page='home'
+        searchTitle={searchTitle}
+        setSearchTitle={setSearchTitle}
+      />
     </>
   );
 }

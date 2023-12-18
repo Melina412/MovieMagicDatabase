@@ -1,6 +1,6 @@
 # MMDb bisherige features
 
-- [❌] “MMDb” ist eine coole Webseite, die es ermöglicht, schnell und einfach nach passenden Filmen zu suchen.
+- [✅] “MMDb” ist eine coole Webseite, die es ermöglicht, schnell und einfach nach passenden Filmen zu suchen.
 - [✅] Es gibt auch eine Unterseite, auf der man die gespeicherten Favoriten anzeigen kann. Es ist möglich Filme von den Favoriten zu entfernen, sowohl auf der Detailseite des Filmes als auch in der Übersicht der Favoriten.
 
 Assets:

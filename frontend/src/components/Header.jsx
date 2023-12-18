@@ -1,7 +1,7 @@
 import Searchbar from './Searchbar';
 import { Link } from 'react-router-dom';
 
-function Header() {
+function Header({ searchTitle, setSearchTitle }) {
   return (
     <header>
       <div className='logo-wrapper'>
@@ -12,7 +12,7 @@ function Header() {
           <img src='img/star.svg' alt='star' />
         </Link>
       </div>
-      <Searchbar />
+      <Searchbar searchTitle={searchTitle} setSearchTitle={setSearchTitle} />
       <div>add your own</div>
     </header>
   );

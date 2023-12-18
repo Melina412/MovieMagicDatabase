@@ -8,7 +8,7 @@ function MovieItem({ movie, favorites, page, deleteFavorite, fetchFavorites }) {
 
   useEffect(() => {
     setIsFavorite(movie?.favorite);
-    console.log('favorite staus wurde aktualisiert:', isFavorite);
+    // console.log('favorite staus wurde aktualisiert:', isFavorite);
   }, [isFavorite, favorites, movies]);
   // der useEffect muss von diesen drei states abhängig sein!
 

@@ -1,5 +1,5 @@
 import MovieItem from './MovieItem';
-// die List darf nicht die movies aus dem context bekommen weil sie von Favorites andere props als movies bekommt als die Homepage
+// die List darf NICHT die movies aus dem context bekommen weil sie von Favorites andere props als movies bekommt als die Homepage
 
 function MovieList({
   movies,

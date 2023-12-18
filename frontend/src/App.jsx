@@ -12,6 +12,8 @@ import Footer from './components/Footer';
 function App() {
   const [movies, setMovies] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [searchTitle, setSearchTitle] = useState('');
+  const [movieOutput, setMovieOutput] = useState([...movies]);
 
   useEffect(() => {
     fetchData();
@@ -42,11 +44,21 @@ function App() {
 
   return (
     <>
-      <MoviesContext.Provider value={{ movies }}>
+      <MoviesContext.Provider
+        value={{ movies, setMovies, movieOutput, setMovieOutput }}
+      >
         <BrowserRouter>
-          <Header />
+          <Header searchTitle={searchTitle} setSearchTitle={setSearchTitle} />
           <Routes>
-            <Route path='/' element={<Home setMovies={setMovies} />} />
+            <Route
+              path='/'
+              element={
+                <Home
+                  searchTitle={searchTitle}
+                  setSearchTitle={setSearchTitle}
+                />
+              }
+            />
             <Route
               path='/movie/:id'
               element={
