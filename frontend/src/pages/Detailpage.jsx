@@ -2,6 +2,7 @@ import { useParams, Link } from 'react-router-dom';
 import { MoviesContext } from '../context/Context';
 import { useContext, useEffect, useState } from 'react';
 import ScrollToTop from '../components/ScrollToTop';
+import Edit from '../components/Edit';
 
 function Detailpage({
   favorites,
@@ -19,6 +20,11 @@ function Detailpage({
 
   const genres = movie?.movieGenre.map((genre) => genre.text);
   const [isFavorite, setIsFavorite] = useState(movie?.favorite);
+
+  const [editMode, setEditMode] = useState(false);
+  const [edited, setEdited] = useState(false);
+  console.log({ editMode });
+  console.log({ edited });
 
   useEffect(() => {
     setIsFavorite(movie?.favorite);
@@ -96,13 +102,17 @@ function Detailpage({
     }
   }
 
-  // es gab beim aktualisieren der detailseite immer viele error weil nie auf movie.xxx zugegriffen werden konnte
-  // lösung: bei jedem einzelnen aufruf movie?.xxx schreiben
+  function handleEditClick() {
+    setEditMode(true);
+    setEdited(false);
+  }
+
+  // detailseite lädt nicht wenn man nich IMMER movie?.xxx schreibt !
   return (
     <>
-      <main>
+      <main className='detailpage'>
         <ScrollToTop />
-        <section className='detailpage'>
+        <section className='movie-details'>
           <h1>{movie?.movieTitle}</h1>
           <div>
             <p>{movie?.movieReleaseYear}</p>
@@ -123,7 +133,9 @@ function Detailpage({
                 </button>
               </div>
             )}
-            <button className='edit'>Edit movie</button>
+            <button className='edit' onClick={handleEditClick}>
+              Edit movie
+            </button>
           </div>
           <article>
             <div className='image'>
@@ -151,6 +163,20 @@ function Detailpage({
             </div>
           </article>
         </section>
+        {editMode && (
+          <Edit
+            movie={movie}
+            genres={genres}
+            fetchData={fetchData}
+            setEdited={setEdited}
+            setEditMode={setEditMode}
+          />
+        )}
+        {edited && (
+          <div className='edit-message'>
+            <p>Movie was successfully edited!</p>
+          </div>
+        )}
       </main>
     </>
   );

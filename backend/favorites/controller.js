@@ -1,6 +1,8 @@
 import { ObjectId } from 'mongodb';
 import { dbo } from '../utils/database.js';
 
+//$ getFavorites - alle Favoriten fetchen
+
 export async function getFavorites(req, res) {
   try {
     const db_response = await dbo.collection('favoriteMovies').find().toArray();
@@ -12,6 +14,8 @@ export async function getFavorites(req, res) {
   }
   res.end();
 }
+
+//$ addFavorite - Film als Favoriten hinzufügen
 
 export async function addFavorite(req, res) {
   console.log('req body:', req.body);
@@ -34,20 +38,17 @@ export async function addFavorite(req, res) {
       const UpdateResult2 = await dbo
         .collection('favoriteMovies')
         .updateOne(query, { $set: { favorite: true } });
-
       // updateOne returnt ein UpdateResult-object das diverse properties besitzt, u.a. modifiedCount & auch acknowledged.
 
       if (!InsertOneResult.acknowledged) {
         console.log('Insertion failed');
-        res.status(500).json({ error: 'Insertion failed' });
+        res.status(500).json();
       } else if (UpdateResult1.modifiedCount <= 0) {
         console.log('Update in movies collection failed');
-        res.status(500).json({ error: 'Update in movies collection failed' });
+        res.status(500).json();
       } else if (UpdateResult2.modifiedCount <= 0) {
         console.log('Update in favoriteMovies collection failed');
-        res
-          .status(500)
-          .json({ error: 'Update in favoriteMovies collection failed' });
+        res.status(500).json();
       } else {
         console.log(req.body.title, 'added to favoriteMovies');
         res.status(201).end();
@@ -62,6 +63,8 @@ export async function addFavorite(req, res) {
     res.status(500).end();
   }
 }
+
+//$ deleteFavorite - Film aus Favoriten löschen
 
 export async function deleteFavorite(req, res) {
   console.log('req body:', req.body);

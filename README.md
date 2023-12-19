@@ -14,7 +14,7 @@ Assets:
 - [✅] Um die Favoriten zu speichern, wird eine zusätzliche Collection in der Datenbank erstellt, in der das Filmobjekt gespeichert wird.
 - [✅] Es werden also zwei Collections benötigt: eine für die Filme an sich und eine für die Favoriten.
 - [❌] Es besteht auch die Möglichkeit, die Filmdatenbank durch einen Screen mit Formularfeldern zu erweitern, um die geforderten Informationen an die Datenbank zu senden.
-- [❌] Bonus: Es gibt auch einen Edit-Button, um Filme nachträglich zu bearbeiten.
+- [✅] Bonus: Es gibt auch einen Edit-Button, um Filme nachträglich zu bearbeiten.
 
 Style:
 
