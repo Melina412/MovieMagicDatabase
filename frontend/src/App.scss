@@ -205,6 +205,7 @@ section.movie-list {
 // - favorites ***************************************************
 
 // - detailpage ***************************************************
+
 main.detailpage {
   width: 90vw;
   padding: 17rem 12rem 30rem 12rem;
@@ -332,6 +333,54 @@ main.detailpage {
     margin-top: 5rem;
     p {
       @include text-style($Poppins300, 3rem, $lightgreen);
+    }
+  }
+}
+
+// - add movie page ********************************************
+
+main.add-your-own {
+  width: 90vw;
+  padding: 17rem 12rem 30rem 12rem;
+  margin-bottom: 20rem;
+  margin-top: 20rem;
+
+  section.add-movie {
+    margin: 20rem auto;
+
+    article {
+      display: flex;
+      flex-direction: column;
+      gap: 5rem;
+
+      input,
+      textarea {
+        @include text-style($Poppins300, 3rem, $lightgreen);
+        background-color: $darkgreen;
+        border: 1px solid $lightgreen;
+        border-radius: 50px;
+        margin-right: 3.6rem;
+        padding: 0 2rem;
+
+        &::placeholder {
+          @include text-style($Poppins300, 3rem, rgba(42, 157, 143, 0.5));
+        }
+      }
+
+      input {
+        @include size(70rem, 6rem);
+
+        &#add-btn {
+          @include text-style($Poppins500, 3rem, $white);
+          background-color: $lightgreen;
+          border: none;
+        }
+      }
+
+      textarea {
+        width: 70rem;
+        padding: 1rem 2rem;
+      }
     }
   }
 }

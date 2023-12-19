@@ -13,7 +13,10 @@ function Header({ searchTitle, setSearchTitle }) {
         </Link>
       </div>
       <Searchbar searchTitle={searchTitle} setSearchTitle={setSearchTitle} />
-      <div className='add'>Add your own</div>
+
+      <Link to={'/add-movie'} title='Add your own Movie'>
+        <p className='add'>Add your own</p>
+      </Link>
     </header>
   );
 }

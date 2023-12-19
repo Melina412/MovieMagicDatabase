@@ -8,6 +8,7 @@ import Detailpage from './pages/Detailpage';
 import Favorites from './pages/Favorites';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import AddYourOwn from './pages/AddYourOwn';
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -67,8 +68,6 @@ function App() {
                   setFavorites={setFavorites}
                   fetchFavorites={fetchFavorites}
                   fetchData={fetchData}
-                  // addFavorite={addFavorite}
-                  // deleteFavorite={deleteFavorite}
                 />
               }
             />
@@ -79,10 +78,12 @@ function App() {
                   favorites={favorites}
                   setFavorites={setFavorites}
                   fetchFavorites={fetchFavorites}
-                  // addFavorite={addFavorite}
-                  // deleteFavorite={deleteFavorite}
                 />
               }
+            />
+            <Route
+              path='/add-movie'
+              element={<AddYourOwn fetchData={fetchData} />}
             />
           </Routes>
           <Footer />

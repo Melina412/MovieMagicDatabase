@@ -49,3 +49,24 @@ export async function editMovie(req, res) {
     res.status(500).end();
   }
 }
+
+//$ addMovie - einen Film hinzufügen
+
+export async function addMovie(req, res) {
+  console.log('req body:', req.body);
+  const query = req.body;
+
+  try {
+    const db_response = await dbo.collection('movies').insertOne(query);
+
+    if (db_response.acknowledged) {
+      console.log(req.body.movieTitle, 'added to movies collection');
+      res.status(201).end();
+    } else {
+      res.status(500).end();
+    }
+  } catch (error) {
+    console.log('error while adding new movie:', error);
+    res.status(500).end();
+  }
+}
